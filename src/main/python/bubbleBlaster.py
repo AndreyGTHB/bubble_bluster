@@ -5,7 +5,7 @@ window = Tk ()
 window.title ('Bubble Blaster')
 c = Canvas (window, width = WIDTH, height = HEIGHT, bg = 'darkblue')
 c.pack ()
-ship_id = c.create_polygon (5, 5, 5, 25, 30, 15, fill = 'red')
+ship_id = c.create_psdolygon (5, 5, 5, 25, 30, 15, fill = 'red')
 ship_id2 = c.create_oval (0, 0, 30, 30, outline = 'red')
 SHIP_SPD = 10
 SHIP_R = 15
