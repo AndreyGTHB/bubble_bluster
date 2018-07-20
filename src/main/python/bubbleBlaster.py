@@ -111,7 +111,7 @@ score = 0
 bonus = 0
 end = time() + TIME_LIMIT
 
-#window.mainloop()
+#window.mainloop()t
 
 # MAIN GAME LOOP
 while time() < end:
