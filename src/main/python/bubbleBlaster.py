@@ -1,62 +1,3 @@
-from tkinter import *
-HEIGHT = 500
-WIDTH = 800
-window = Tk ()
-window.title ('Bubble Blaster')
-c = Canvas (window, width = WIDTH, height = HEIGHT, bg = 'darkblue')
-c.pack ()
-ship_id = c.create_psdolygon (5, 5, 5, 25, 30, 15, fill = 'red')
-ship_id2 = c.create_oval (0, 0, 30, 30, outline = 'red')
-SHIP_SPD = 10
-SHIP_R = 15
-MID_X = WIDTH / 2
-MID_Y = HEIGHT / 2
-
-c.bind_all ('<Key>', move_ship)
-from random import randint
-bub_id = list ()
-bub_r = list ()
-bub_speed = list ()
-MIN_BUB_R = 10
-MAX_BUB_R = 30
-MAX_BUB_SPD = 10
-GAP = 100
-from math import sqrt
-
-c.create_text (50, 30, text = 'TIME', fill = 'white')
-c.create_text (150, 30, text= 'SCORE', fill = 'white')
-time_text = c.create_text (50, 50, fill = 'white')
-score_text = c.create_text (150, 50, fill = 'white')
-from time import sleep, time
-BUB_CHANCE = 10
-TIME_LIMIT = 30
-BONUS_SCORE = 1000
-score = 0
-bonus = 0
-end = time () + TIME_LIMIT
-
-#MAIN GAME LOOP
-while time () < end:
-    if randint (1, BUB_CHANCE) == 1:
-        create_bubble ()
-    move_bubbles ()
-    clean_up_bubs ()
-    score += collision ()
-    if (int (score / BONUS_SCORE)) > bonus:
-        bonus += 1
-        end += TIME_LIMIT
-    show_score (score)
-    show_time (int (end - time ()))
-    window.update
-    sleep (0.01)
-c.create_text (MID_X, MID_Y, \
-               text = 'GAME OVER!', fill = 'white', font = ('Helvetica', 30))
-c.create_text (MID_X, MID_Y + 30, \
-               text = 'Score: ' + str (score), fill = 'white')
-c.create_text (MID_X, MID_Y + 45, \
-               text = 'Bonus time: ' + str (bonus * TIME_LIMIT), fill = 'white')
-
-
 def move_ship (event):
     if event.keysym == 'Up':
         c.move (ship_id, 0, -SHIP_SPD)
@@ -127,4 +68,64 @@ def show_score (score):
 
 def show_time (time_left):
     c.itemconfig (time_text, text = time_left)
+
+
+from tkinter import *
+HEIGHT = 500
+WIDTH = 800
+window = Tk ()
+window.title ('Bubble Blaster')
+c = Canvas (window, width = WIDTH, height = HEIGHT, bg = 'darkblue')
+c.pack ()
+ship_id = c.create_polygon (5, 5, 5, 25, 30, 15, fill = 'red')
+ship_id2 = c.create_oval (0, 0, 30, 30, outline = 'red')
+SHIP_SPD = 10
+SHIP_R = 15
+MID_X = WIDTH / 2
+MID_Y = HEIGHT / 2
+
+c.bind_all ('<Key>', move_ship)
+from random import randint
+bub_id = list ()
+bub_r = list ()
+bub_speed = list ()
+MIN_BUB_R = 10
+MAX_BUB_R = 30
+MAX_BUB_SPD = 10
+GAP = 100
+from math import sqrt
+
+c.create_text (50, 30, text = 'TIME', fill = 'white')
+c.create_text (150, 30, text= 'SCORE', fill = 'white')
+time_text = c.create_text (50, 50, fill = 'white')
+score_text = c.create_text (150, 50, fill = 'white')
+from time import sleep, time
+BUB_CHANCE = 10
+TIME_LIMIT = 30
+BONUS_SCORE = 1000
+score = 0
+bonus = 0
+end = time () + TIME_LIMIT
+
+#MAIN GAME LOOP
+while time () < end:
+    if randint (1, BUB_CHANCE) == 1:
+        create_bubble ()
+    move_bubbles ()
+    clean_up_bubs ()
+    score += collision ()
+    if (int (score / BONUS_SCORE)) > bonus:
+        bonus += 1
+        end += TIME_LIMIT
+    show_score (score)
+    show_time (int (end - time ()))
+    window.update
+    sleep (0.01)
+c.create_text (MID_X, MID_Y, \
+               text = 'GAME OVER!', fill = 'white', font = ('Helvetica', 30))
+c.create_text (MID_X, MID_Y + 30, \
+               text = 'Score: ' + str (score), fill = 'white')
+c.create_text (MID_X, MID_Y + 45, \
+               text = 'Bonus time: ' + str (bonus * TIME_LIMIT), fill = 'white')
+
 
