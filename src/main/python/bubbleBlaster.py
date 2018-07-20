@@ -1,3 +1,8 @@
+from random import randint
+from tkinter import *
+from math import sqrt
+from time import sleep, time
+
 def move_ship (event):
     if event.keysym == 'Up':
         c.move (ship_id, 0, -SHIP_SPD)
@@ -12,7 +17,6 @@ def move_ship (event):
         c.move (ship_id, -SHIP_SPD, 0)
         c.move (ship_id2, -SHIP_SPD, 0)
 
-
 def create_bubble ():
     x = WIDTH + GAP
     y = randint (0, HEIGHT)
@@ -22,11 +26,9 @@ def create_bubble ():
     bub_r.append (r)
     bub_speed.append (randint (1, MAX_BUB_SPD))
 
-
 def move_bubbles ():
     for i in range (len (bub_id)):
         c.move (bub_id [i], -bub_speed [i], 0)
-
 
 def get_coords (id_num):
     pos = c.coords (id_num)
@@ -34,13 +36,11 @@ def get_coords (id_num):
     y = (pos [1] + pos [3]) / 2
     return x, y
 
-
 def del_bubble (i):
     del bub_r [i]
     del bub_speed [i]
     c.delete (bub_id [i])
     del bub_id [i]
-
 
 def clean_up_bubs ():
     for i in range (len (bub_id) - 1, -1, -1):
@@ -48,12 +48,10 @@ def clean_up_bubs ():
         if x < -GAP:
             del_bubble (i)
 
-
 def distance (id1, id2):
     x1, y1 = get_coords (id1)
     x2, y2 = get_coords (id2)
     return sqrt ((x2 - x1) ** 2 + (y2 - y1) ** 2)
-
 
 def collision ():
     points = 0
@@ -69,8 +67,6 @@ def show_score (score):
 def show_time (time_left):
     c.itemconfig (time_text, text = time_left)
 
-
-from tkinter import *
 HEIGHT = 500
 WIDTH = 800
 window = Tk ()
@@ -85,7 +81,6 @@ MID_X = WIDTH / 2
 MID_Y = HEIGHT / 2
 
 c.bind_all ('<Key>', move_ship)
-from random import randint
 bub_id = list ()
 bub_r = list ()
 bub_speed = list ()
@@ -93,19 +88,19 @@ MIN_BUB_R = 10
 MAX_BUB_R = 30
 MAX_BUB_SPD = 10
 GAP = 100
-from math import sqrt
 
 c.create_text (50, 30, text = 'TIME', fill = 'white')
 c.create_text (150, 30, text= 'SCORE', fill = 'white')
 time_text = c.create_text (50, 50, fill = 'white')
 score_text = c.create_text (150, 50, fill = 'white')
-from time import sleep, time
 BUB_CHANCE = 10
 TIME_LIMIT = 30
 BONUS_SCORE = 1000
 score = 0
 bonus = 0
 end = time () + TIME_LIMIT
+
+window.mainloop()
 
 #MAIN GAME LOOP
 while time () < end:
