@@ -1,5 +1,5 @@
 # Bubble Blaster
 
-Python project from a book about programming for children
+**Python** project from a book about *programming for children*.
 
 
